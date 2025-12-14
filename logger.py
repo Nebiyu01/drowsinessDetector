@@ -21,3 +21,21 @@ def append_event(path, ear, mar, reason, fps):
         if not file_exists:
             w.writerow(HEADER)
         w.writerow(row)
+
+def append_marker(path, label):
+    ts = datetime.now(timezone.utc)
+    row = [
+        ts.isoformat(),
+        f"{ts.timestamp():.3f}",
+        "",
+        "",
+        f"marker:{label}",
+        "",
+    ]
+
+    file_exists = os.path.exists(path)
+    with open(path, "a", newline="") as f:
+        w = csv.writer(f)
+        if not file_exists:
+            w.writerow(HEADER)
+        w.writerow(row)
